@@ -1,4 +1,4 @@
-# SURF: simple user-friendly reaction format
+# SURF: a simple user-friendly reaction format
 
 This repository containes example files and code to read, write and transform **SURF files** containing **chemical reaction data**.
 
