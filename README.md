@@ -1,0 +1,78 @@
+# SURF: simple user-friendly reaction format
+
+This repo containes example files and code to read, write and transform SURF files containing reaction data.
+
+## Installation
+To install the necessary requirements to run the scripts in this repository, do the following (assuming you have `pip` installed):
+```bash
+pip install -r requirements.txt
+```
+Now you should be ready to go.
+
+## SURF Structure
+SURF is a tabular file structure that is both human- and machine-readable. In a SURF spreadsheet, each row stores data of one reaction. The column headers structure the data and are split into constant (CC) and flexible (FC) categories. CCs never change and should be always present, independent of the number of reaction components. They capture the identifiers and provenance of the reaction as well as basic characteristics (reaction type, named reaction, reaction technology) and conditions (temperature, time, atmosphere, scale, concentration, stirring/shaking). Add-ons, such as the procedure or comments, belong to the CCs as well. The FCs describe the more variable part of a reaction, the different starting material(s), solvent(s), reagent(s) and product(s). Each reaction component is described by at an identifier such as the CAS number or molecule name, and a SMILES or InChI string storing the chemcial structure. While the SMILES/InChI string is available for every compound and can also serve as structural input for machine learning models, the CAS number, even though not always available, can be handy for chemists in the lab to order, itemize and find chemicals. For the starting material(s) and reagent(s), e.g. catalyst, ligand, additive, in addition to the two identifiers, a third column is added to cover the stochiometric amount (equivalents). For products, the respective yield and yield type is referenced. The flexibility of SURF allows capturing multiple starting materials and reagents, as these can be accommodated by adding three additional columns with (CAS, SMILES/InChI, and equivalents). If desired, further columns for additional identifiers like names or lot numbers can be added.
+
+The file `data/surf_template.tsv` provides an example of the SURF structure with five minisci-type reactions from literature.
+
+## Combining Multiple SURF Files
+To concatenate multiple SURF files into one larger file, put all SURF files to be combined into one folder and run the following:
+```bash
+python concat_surf.py <folder path> <output file>
+```
+
+## Transformations for Interoperability
+The idea of SURF is not to replace existing reaction file structures, but have a human- and machine-readable format that is interoperable. Below we describe examples of how to transform SURF into other existing formats and back.
+
+### SURF to ORD
+The [Open Reaction Database (ORD)](https://pubs.acs.org/doi/10.1021/jacs.1c09820) is an open-access schema and infrastructure for structuring and sharing organic reaction data. Translating SURF files into the protocol buffers format used by the open reaction database, run the following:
+```bash
+python surf2ord.py <input SURF file> <output ORD file>
+```
+To get all the options of the script, run:
+```bash
+python surf2ord.py --help
+```
+
+### ORD to SURF
+To translate protocol buffers files used by the open reaction database back into the SURF format, run the following:
+```bash
+python ord2surf.py <input ORD file> <output SURF file>
+```
+To get all the options of the script, run:
+```bash
+python ord2surf.py --help
+```
+
+### SURF to Reaction SMILES
+Reaction SMILES are a frequently used representation for chemical reactions. However, they just represent the molecular structures involved in the reaction and lack detailed information on conditions, equivalents and analytics. We therefore only provide a way to translate SURF files into Reaction SMILES but not vice versa:
+```bash
+python surf2rxnsmiles.py <input SURF file> <output RXNSMILES file>
+```
+To get all the options of the script, run:
+```bash
+python surf2rxnsmiles.py --help
+```
+
+### SURF to UDM
+The [Unified Data Model (UDM)](https://doi.org/10.1515/pac-2021-3013) is an open, extendable and freely available data format for the exchange of experimental information about compound synthesis and testing, developed by the [Pistoia Alliance](https://www.pistoiaalliance.org/projects/current-projects/unified-data-model/). To translate SURF files into UDM XML files, run the following: 
+```bash
+python surf2udm.py <input SURF file> <output UDM file>
+```
+To get all the options of the script, run:
+```bash
+python surf2udm.py --help
+```
+
+### UDM to SURF
+To translate UDM XML files into SURF files, run the following: 
+```bash
+python udm2surf.py <input UDM file> <output SURF file>
+```
+To get all the options of the script, run:
+```bash
+python udm2surf.py --help
+```
+
+## Citation
+If you are using SURF in your project, we would appreciate you citing the following reference:
+*TOTO: add SURF paper reference*
