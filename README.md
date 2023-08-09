@@ -33,6 +33,8 @@ To get all the options of the script, run:
 python surf2ord.py --help
 ```
 
+If the SURF file does not contain any or only partial provenance information, the user can provide personal information with the `--username`, `--email`, `--orcid` and `--organization` options.
+
 ### ORD to SURF
 To translate protocol buffers files used by the open reaction database back into the SURF format, run the following:
 ```bash
