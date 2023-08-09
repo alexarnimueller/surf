@@ -1,3 +1,8 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright (©) 2023, F. Hoffmann La-Roche Ltd.
+
 from ord_schema.proto import reaction_pb2
 
 doi_pattern = "10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&'<>])\S)+"

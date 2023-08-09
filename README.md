@@ -1,9 +1,9 @@
 # SURF: simple user-friendly reaction format
 
-This repo containes example files and code to read, write and transform SURF files containing reaction data.
+This repository containes example files and code to read, write and transform **SURF files** containing **chemical reaction data**.
 
 ## Installation
-To install the necessary requirements to run the scripts in this repository, do the following (assuming you have `pip` installed):
+First, clone this repository and then install the necessary requirements by running the following command (assuming you have `pip` installed):
 ```bash
 pip install -r requirements.txt
 ```

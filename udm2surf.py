@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Copyright (©) 2023, F. Hoffmann La-Roche Ltd.
 
 import logging
 
@@ -9,7 +11,7 @@ from bs4 import BeautifulSoup
 from lxml import etree
 from rdkit.Chem import MolFromMolBlock, MolToSmiles
 
-# TODO: get complete example and finalize
+# TODO: get complete UDM example and finalize
 
 logging.basicConfig(format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)

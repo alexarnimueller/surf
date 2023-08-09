@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Copyright (©) 2023, F. Hoffmann La-Roche Ltd.
 
 import logging
 import re

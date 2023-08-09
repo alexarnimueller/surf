@@ -1,11 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
-"""
-Description: This file contains utility functions to help other functions in this package.
-Author: Alex Müller <alex.mueller@roche.com>
-Last updated: 2023-02-21
-"""
+#
+# Copyright (©) 2023, F. Hoffmann La-Roche Ltd.
 
 import logging
 import os
