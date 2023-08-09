@@ -77,4 +77,13 @@ python udm2surf.py --help
 
 ## Citation
 If you are using SURF in your project, we would appreciate you citing the following reference:
-*TOTO: add SURF paper reference*
+```
+@article{nippa_mueller2023surf,
+  title={SURF - a simple, user-friendly reaction format},
+  author={Nippa, David F. and M{\"u}ller, Alex T. and Atz, Kenneth and Konrad, David B. and Grether, Uwe and Martin, Rainer E. and Schneider, Gisbert},
+  journal={},
+  year={}
+}
+
+# ToDo: To be updated with DOI and journal.
+```
