@@ -76,7 +76,7 @@ python udm2surf.py --help
 ```
 
 ## Citation
-If you are using SURF in your project, we would appreciate you citing the following reference:
+If you are using SURF in your project, please cite the following reference:
 ```
 @article{nippa_mueller2023surf,
   title={SURF - a simple, user-friendly reaction format},
