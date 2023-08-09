@@ -1,0 +1,1121 @@
+reactions {
+  identifiers {
+    type: NAME
+    value: "lsf_lit_minisci_1"
+  }
+  identifiers {
+    type: CUSTOM
+    details: "alkylation minisci standard"
+    value: "alkylation minisci standard"
+  }
+  inputs {
+    key: "catalyst"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "[Fe].O=S(=O)(O)O.O"
+        }
+        identifiers {
+          type: NAME
+          value: "7782-63-0"
+        }
+        amount {
+          moles {
+            value: 0.3
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: CATALYST
+      }
+    }
+  }
+  inputs {
+    key: "reagent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(=O)(O)O"
+        }
+        identifiers {
+          type: NAME
+          value: "7664-93-9"
+        }
+        amount {
+          moles {
+            value: 1.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "OO"
+        }
+        identifiers {
+          type: NAME
+          value: "7722-84-1"
+        }
+        amount {
+          moles {
+            value: 3.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+    }
+  }
+  inputs {
+    key: "solvent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O"
+        }
+        identifiers {
+          type: NAME
+          value: "7732-18-5"
+        }
+        amount {
+          volume {
+            value: 0.3
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(C)C"
+        }
+        identifiers {
+          type: NAME
+          value: "67-68-5"
+        }
+        amount {
+          volume {
+            value: 4.7
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+    }
+  }
+  inputs {
+    key: "startingmat"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "IC1COC1"
+        }
+        identifiers {
+          type: NAME
+          value: "26272-85-5"
+        }
+        amount {
+          moles {
+            value: 1.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "FC1=CC=C(C=C1Cl)NC=2N=CN=C3C=C(OC)C(OCCCN4CCOCC4)=CC32"
+        }
+        identifiers {
+          type: NAME
+          value: "184475-35-2"
+        }
+        amount {
+          moles {
+            value: 0.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+    }
+  }
+  conditions {
+    temperature {
+      setpoint {
+        value: 60.0
+        units: CELSIUS
+      }
+    }
+    pressure {
+      control {
+        type: SEALED
+      }
+      atmosphere {
+        type: AIR
+      }
+    }
+    stirring {
+    }
+  }
+  outcomes {
+    reaction_time {
+      value: 0.5
+      units: HOUR
+    }
+    products {
+      identifiers {
+        type: SMILES
+        value: "FC1=CC=C(C=C1Cl)NC=2N=C(N=C3C=C(OC)C(OCCCN4CCOCC4)=CC32)C5COC5"
+      }
+      identifiers {
+        type: NAME
+        value: "1180654-05-0"
+      }
+      measurements {
+        analysis_key: "MS of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "NMR of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "product_1_UNKNOWN"
+        type: YIELD
+        percentage {
+          value: 1300.0
+        }
+      }
+      reaction_role: PRODUCT
+    }
+    analyses {
+      key: "MS of product_1"
+      value {
+        type: MS
+        details: "MS Found: 503.1800"
+        data {
+          key: "found"
+          value {
+            float_value: 503.18
+            description: "Observed m/z"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "NMR of product_1"
+      value {
+        type: NMR_1H
+        data {
+          key: "peaks"
+          value {
+            string_value: "1H NMR (400 MHz; CDCl3) \316\264 8.01 (dd, J = 6.5, 2.7 Hz, 1H), 7.70-7.66 (m, 1H), 7.32 (br. s, 1H), 7.23 (s, 1H), 7.19 (t, J = 8.7 Hz, 1H), 7.09 (s, 1H), 5.13 (t, J = 6.3 Hz, 2H), 5.08 (dd, J = 8.5, 5.8 Hz, 2H), 4.49-4.41 (m, 1H), 4.21 (t, J = 6.6 Hz, 2H), 4.00 (s, 3H), 3.75 (t, J = 4.6 Hz,  4H),  2.60  (t,  J  =  7.0  Hz,  2H),  2.51  (br.  s,  4H),  2.17-2.20  (m,  2H);  13C  NMR  (100  MHz;  CDCl3) 162.9, 156.4, 155.5, 152.4 (d, J = 244 Hz), 147.0, 146.2, 135.7 (d, J = 5 Hz), 123.5, 121.1, 121.0 (d, J = 7  Hz),  116.8  (d,  J  =  22  Hz),  108.0,  107.2,  100.7,  76.1,  67.8,  67.0,  56.4,  55.5,  52.9,  43.0,  26.2"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "product_1_UNKNOWN"
+      value {
+        type: CUSTOM
+        details: "UNKNOWN"
+      }
+    }
+  }
+  provenance {
+    doi: "10.1021/jo9010624"
+    record_created {
+      time {
+        value: "2023-08-09"
+      }
+      person {
+        username: "Alex T. Mueller"
+        orcid: "0000-0001-8063-9952"
+        organization: "F. Hoffmann-La Roche Ltd."
+        email: "alex.mueller@roche.com"
+      }
+    }
+  }
+}
+reactions {
+  identifiers {
+    type: NAME
+    value: "lsf_lit_minisci_2"
+  }
+  identifiers {
+    type: CUSTOM
+    details: "alkylation minisci standard"
+    value: "alkylation minisci standard"
+  }
+  inputs {
+    key: "catalyst"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "[Fe].O=S(=O)(O)O.O"
+        }
+        identifiers {
+          type: NAME
+          value: "7782-63-0"
+        }
+        amount {
+          moles {
+            value: 0.3
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: CATALYST
+      }
+    }
+  }
+  inputs {
+    key: "reagent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(=O)(O)O"
+        }
+        identifiers {
+          type: NAME
+          value: "7664-93-9"
+        }
+        amount {
+          moles {
+            value: 1.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "OO"
+        }
+        identifiers {
+          type: NAME
+          value: "7722-84-1"
+        }
+        amount {
+          moles {
+            value: 3.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+    }
+  }
+  inputs {
+    key: "solvent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(C)C"
+        }
+        identifiers {
+          type: NAME
+          value: "67-68-5"
+        }
+        amount {
+          volume {
+            value: 4.7
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O"
+        }
+        identifiers {
+          type: NAME
+          value: "7732-18-5"
+        }
+        amount {
+          volume {
+            value: 0.3
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+    }
+  }
+  inputs {
+    key: "startingmat"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=C(OC(C)(C)C)N1CC(I)C1"
+        }
+        identifiers {
+          type: NAME
+          value: "254454-54-1"
+        }
+        amount {
+          moles {
+            value: 1.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "N#CC1=CN=C2C=C(OC)C(OC)=CC2=C1NC3=CC=C(Cl)C=C3Cl"
+        }
+        identifiers {
+          type: NAME
+          value: "331662-50-1"
+        }
+        amount {
+          moles {
+            value: 0.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+    }
+  }
+  conditions {
+    temperature {
+      setpoint {
+        value: 50.0
+        units: CELSIUS
+      }
+    }
+    pressure {
+      control {
+        type: SEALED
+      }
+      atmosphere {
+        type: AIR
+      }
+    }
+    stirring {
+    }
+  }
+  outcomes {
+    reaction_time {
+      value: 1.1
+      units: HOUR
+    }
+    products {
+      identifiers {
+        type: SMILES
+        value: "N#CC=1C(=NC=2C=C(OC)C(OC)=CC2C1NC3=CC=C(Cl)C=C3Cl)C4CN(C(=O)OC(C)(C)C)C4"
+      }
+      identifiers {
+        type: NAME
+        value: "1180654-03-8"
+      }
+      measurements {
+        analysis_key: "MS of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "NMR of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "product_1_UNKNOWN"
+        type: YIELD
+        percentage {
+          value: 4400.0
+        }
+      }
+      reaction_role: PRODUCT
+    }
+    analyses {
+      key: "MS of product_1"
+      value {
+        type: MS
+        details: "MS Found: 529.1400"
+        data {
+          key: "found"
+          value {
+            float_value: 529.14
+            description: "Observed m/z"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "NMR of product_1"
+      value {
+        type: NMR_1H
+        data {
+          key: "peaks"
+          value {
+            string_value: "1H  NMR  (400  MHz;  d6-DMSO) \316\264  9.50  (br.  s,  1H), 7.79 (s, 1H), 7.77 (s, 1H), 7.48 (s, 1H), 7.36 (s, 1H), 4.20-4.06 (m, 5H), 3.97 (s, 3H), 3.92 (s, 3H), 1.39 (s, 9H); 13C NMR (100 MHz; d6-DMSO) \316\264 159.3, 155.7, 153.8, 150.7, 149.2, 144.6, 136.2, 131.8, 131.4,  129.9,  129.3,  128.1,  115.7,  112.0,  108.8,  101.7,  86.0,  78.6,  56.2,  56.0,  53.5,  52.3,  33.4,  28.1"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "product_1_UNKNOWN"
+      value {
+        type: CUSTOM
+        details: "UNKNOWN"
+      }
+    }
+  }
+  provenance {
+    doi: "10.1021/jo9010624"
+    record_created {
+      time {
+        value: "2023-08-09"
+      }
+      person {
+        username: "Alex T. Mueller"
+        orcid: "0000-0001-8063-9952"
+        organization: "F. Hoffmann-La Roche Ltd."
+        email: "alex.mueller@roche.com"
+      }
+    }
+  }
+}
+reactions {
+  identifiers {
+    type: NAME
+    value: "lsf_lit_minisci_3"
+  }
+  identifiers {
+    type: CUSTOM
+    details: "alkylation minisci standard"
+    value: "alkylation minisci standard"
+  }
+  inputs {
+    key: "catalyst"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "[Fe].O=S(=O)(O)O.O"
+        }
+        identifiers {
+          type: NAME
+          value: "7782-63-0"
+        }
+        amount {
+          moles {
+            value: 0.3
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: CATALYST
+      }
+    }
+  }
+  inputs {
+    key: "reagent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "OO"
+        }
+        identifiers {
+          type: NAME
+          value: "7722-84-1"
+        }
+        amount {
+          moles {
+            value: 3.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(=O)(O)O"
+        }
+        identifiers {
+          type: NAME
+          value: "7664-93-9"
+        }
+        amount {
+          moles {
+            value: 1.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+    }
+  }
+  inputs {
+    key: "solvent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O"
+        }
+        identifiers {
+          type: NAME
+          value: "7732-18-5"
+        }
+        amount {
+          volume {
+            value: 0.3
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(C)C"
+        }
+        identifiers {
+          type: NAME
+          value: "67-68-5"
+        }
+        amount {
+          volume {
+            value: 4.7
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+    }
+  }
+  inputs {
+    key: "startingmat"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "N#CC1=CN=C2C=C(OC)C(OC)=CC2=C1NC3=CC=C(Cl)C=C3Cl"
+        }
+        identifiers {
+          type: NAME
+          value: "331662-50-1"
+        }
+        amount {
+          moles {
+            value: 0.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "IC1COC1"
+        }
+        identifiers {
+          type: NAME
+          value: "26272-85-5"
+        }
+        amount {
+          moles {
+            value: 1.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+    }
+  }
+  conditions {
+    temperature {
+      setpoint {
+        value: 60.0
+        units: CELSIUS
+      }
+    }
+    pressure {
+      control {
+        type: SEALED
+      }
+      atmosphere {
+        type: AIR
+      }
+    }
+    stirring {
+    }
+  }
+  outcomes {
+    reaction_time {
+      value: 0.75
+      units: HOUR
+    }
+    products {
+      identifiers {
+        type: SMILES
+        value: "N#CC=1C(=NC=2C=C(OC)C(OC)=CC2C1NC3=CC=C(Cl)C=C3Cl)C4COC4"
+      }
+      identifiers {
+        type: NAME
+        value: "1180654-00-5"
+      }
+      measurements {
+        analysis_key: "MS of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "NMR of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "product_1_UNKNOWN"
+        type: YIELD
+        percentage {
+          value: 3800.0
+        }
+      }
+      reaction_role: PRODUCT
+    }
+    analyses {
+      key: "MS of product_1"
+      value {
+        type: MS
+        details: "MS Found: 430.0700"
+        data {
+          key: "found"
+          value {
+            float_value: 430.07
+            description: "Observed m/z"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "NMR of product_1"
+      value {
+        type: NMR_1H
+        data {
+          key: "peaks"
+          value {
+            string_value: "1H NMR (400 MHz; d6-DMSO) \316\264 9.50 (br. s, 1H), 7.80 (s, 1H), 7.77 (t, J = 1.3 Hz, 1H), 7.47 (d, J = 1.3 Hz, 1H), 7.37 (s, 1H), 4.93 (app. t, J = 6.2 Hz, 2H), 4.85 (dd, J = 8.4, 5.6 Hz, 2H), 4.60-4.52  (m,  1H),  3.97  (s,  3H),  3.93  (s,  3H);  13C  NMR  (100  MHz;  d6-DMSO)  159.3,  153.8,  150.7,  149.2,  144.8, 136.2, 131.9, 131.4, 130.0, 129.3, 128.1, 115.7, 112.0, 108.7, 101.7, 85.8, 73.8, 56.2, 56.0, 39.6"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "product_1_UNKNOWN"
+      value {
+        type: CUSTOM
+        details: "UNKNOWN"
+      }
+    }
+  }
+  provenance {
+    doi: "10.1021/jo9010624"
+    record_created {
+      time {
+        value: "2023-08-09"
+      }
+      person {
+        username: "Alex T. Mueller"
+        orcid: "0000-0001-8063-9952"
+        organization: "F. Hoffmann-La Roche Ltd."
+        email: "alex.mueller@roche.com"
+      }
+    }
+  }
+}
+reactions {
+  identifiers {
+    type: NAME
+    value: "lsf_lit_minisci_4"
+  }
+  identifiers {
+    type: CUSTOM
+    details: "alkylation minisci standard"
+    value: "alkylation minisci standard"
+  }
+  inputs {
+    key: "reagent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(=O)(O)OOS(=O)(=O)O.N"
+        }
+        identifiers {
+          type: NAME
+          value: "7727-54-0"
+        }
+        amount {
+          moles {
+            value: 10.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+    }
+  }
+  inputs {
+    key: "solvent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(C)C"
+        }
+        identifiers {
+          type: NAME
+          value: "67-68-5"
+        }
+        amount {
+          volume {
+            value: 6999.881
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O"
+        }
+        identifiers {
+          type: NAME
+          value: "7732-18-5"
+        }
+        amount {
+          volume {
+            value: 0.119
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+    }
+  }
+  inputs {
+    key: "startingmat"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=C(O)C1CCCCC1"
+        }
+        identifiers {
+          type: NAME
+          value: "98-89-5"
+        }
+        amount {
+          moles {
+            value: 35.0
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "N=1C=2C=CC=CC2C=CC1C"
+        }
+        identifiers {
+          type: NAME
+          value: "91-63-4"
+        }
+        amount {
+          moles {
+            value: 3.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+    }
+  }
+  conditions {
+    temperature {
+      setpoint {
+        value: 40.0
+        units: CELSIUS
+      }
+    }
+    pressure {
+      control {
+        type: SEALED
+      }
+      atmosphere {
+        type: ARGON
+      }
+    }
+    stirring {
+    }
+  }
+  outcomes {
+    reaction_time {
+      value: 16.0
+      units: HOUR
+    }
+    products {
+      identifiers {
+        type: SMILES
+        value: "N=1C=2C=CC=CC2C(=CC1C)C3CCCCC3"
+      }
+      identifiers {
+        type: NAME
+        value: "37597-46-9"
+      }
+      measurements {
+        analysis_key: "NMR of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "product_1_UNKNOWN"
+        type: YIELD
+        percentage {
+          value: 7800.0
+        }
+      }
+      reaction_role: PRODUCT
+    }
+    analyses {
+      key: "NMR of product_1"
+      value {
+        type: NMR_1H
+        data {
+          key: "peaks"
+          value {
+            string_value: "1HNMR (CDCl3, 300 MHz) \316\264 8.10 \342\200\223 7.94 (2H, m, Ar\342\200\220H), 7.65 (1H, ddd, J=8.4, 6.8, 1.4 Hz, Ar\342\200\220H), 7.48 (1H,ddd, J=8.3, 6.8, 1.3 Hz, Ar\342\200\220H), 7.17 (1H, s, Ar\342\200\220H), 3.39 \342\200\223 3.20 (1H, m, alkyl CH), 2.72 (3H, s, CH3), 2.08 \342\200\223 1.80 (5H, m, alkyl CHs), 1.66 \342\200\223 1.44 (4H, m, alkyl CHs), 1.41 \342\200\223 1.28 (1H, m, alkyl CH); 13C NMR (75 MHz, CDCl3) \316\264 159.0, 153.4, 148.3, 129.7, 128.9, 125.4, 125.3, 123.0, 118.5, 38.9, 33.7, 27.1, 26.5,25.7"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "product_1_UNKNOWN"
+      value {
+        type: CUSTOM
+        details: "UNKNOWN"
+      }
+    }
+  }
+  provenance {
+    doi: "10.1021/acs.orglett.8b02988"
+    record_created {
+      time {
+        value: "2023-08-09"
+      }
+      person {
+        username: "Alex T. Mueller"
+        orcid: "0000-0001-8063-9952"
+        organization: "F. Hoffmann-La Roche Ltd."
+        email: "alex.mueller@roche.com"
+      }
+    }
+  }
+}
+reactions {
+  identifiers {
+    type: NAME
+    value: "lsf_lit_minisci_5"
+  }
+  identifiers {
+    type: CUSTOM
+    details: "alkylation minisci standard"
+    value: "alkylation minisci standard"
+  }
+  inputs {
+    key: "reagent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(=O)(O)OOS(=O)(=O)O.N"
+        }
+        identifiers {
+          type: NAME
+          value: "7727-54-0"
+        }
+        amount {
+          moles {
+            value: 0.45
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REAGENT
+      }
+    }
+  }
+  inputs {
+    key: "solvent"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "O"
+        }
+        identifiers {
+          type: NAME
+          value: "7732-18-5"
+        }
+        amount {
+          volume {
+            value: 0.0051
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=S(C)C"
+        }
+        identifiers {
+          type: NAME
+          value: "67-68-5"
+        }
+        amount {
+          volume {
+            value: 299.9949
+            units: MILLILITER
+          }
+        }
+        reaction_role: SOLVENT
+      }
+    }
+  }
+  inputs {
+    key: "startingmat"
+    value {
+      components {
+        identifiers {
+          type: SMILES
+          value: "N=1C=CC(=C2C=CC=CC12)C"
+        }
+        identifiers {
+          type: NAME
+          value: "491-35-0"
+        }
+        amount {
+          moles {
+            value: 0.15
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+      components {
+        identifiers {
+          type: SMILES
+          value: "O=C(O)C1CCCCC1"
+        }
+        identifiers {
+          type: NAME
+          value: "98-89-5"
+        }
+        amount {
+          moles {
+            value: 1.5
+            units: MILLIMOLE
+          }
+        }
+        reaction_role: REACTANT
+      }
+    }
+  }
+  conditions {
+    temperature {
+      setpoint {
+        value: 40.0
+        units: CELSIUS
+      }
+    }
+    pressure {
+      control {
+        type: SEALED
+      }
+      atmosphere {
+        type: ARGON
+      }
+    }
+    stirring {
+    }
+  }
+  outcomes {
+    reaction_time {
+      value: 16.0
+      units: HOUR
+    }
+    products {
+      identifiers {
+        type: SMILES
+        value: "N=1C=2C=CC=CC2C(=CC1C3CCCCC3)C"
+      }
+      identifiers {
+        type: NAME
+        value: "56947-80-9"
+      }
+      measurements {
+        analysis_key: "NMR of product_1"
+        type: IDENTITY
+      }
+      measurements {
+        analysis_key: "product_1_UNKNOWN"
+        type: YIELD
+        percentage {
+          value: 8200.0
+        }
+      }
+      reaction_role: PRODUCT
+    }
+    analyses {
+      key: "NMR of product_1"
+      value {
+        type: NMR_1H
+        data {
+          key: "peaks"
+          value {
+            string_value: "1HNMR(CDCl3,300MHz) \316\264 8.04(1H,ddd,J=8.4,1.3,0.6Hz,Ar\342\200\220H),7.94(1H,dm,J=8.2Hz,Ar\342\200\220H),7.66(1H,ddd,J=8.4,6.9,1.5Hz,Ar\342\200\220H),7.49(1H,ddd,J=8.2,6.9,1.3Hz,Ar\342\200\220H),7.17(1H,q,J=0.9Hz,Ar\342\200\220H),2.87(1H,tt,J=11.9,3.4Hz,alkylCH),2.68(3H,d,J=0.9Hz,CH3),2.07\342\200\2231.74(5H,m,alkylCHs),1.66\342\200\2231.23(5H,m,alkylCHs);13CNMR(75MHz,CDCl3) \316\264 166.7,147.7,144.4,129.6,129.1,127.2,125.5,123.7,120.4,47.7,33.0,26.7,26.3,19.0"
+          }
+        }
+      }
+    }
+    analyses {
+      key: "product_1_UNKNOWN"
+      value {
+        type: CUSTOM
+        details: "UNKNOWN"
+      }
+    }
+  }
+  provenance {
+    doi: "10.1021/acs.orglett.8b02988"
+    record_created {
+      time {
+        value: "2023-08-09"
+      }
+      person {
+        username: "Alex T. Mueller"
+        orcid: "0000-0001-8063-9952"
+        organization: "F. Hoffmann-La Roche Ltd."
+        email: "alex.mueller@roche.com"
+      }
+    }
+  }
+}

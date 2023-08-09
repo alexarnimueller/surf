@@ -13,17 +13,15 @@ from rdkit.Chem import MolFromSmiles, MolToSmiles
 from rich.progress import track
 from typing_extensions import Annotated
 
-from surf_utils.helpers import (
+from surf_utils.helpers import pubchem_property_from_cas
+from surf_utils.mappings import (
     doi_pattern,
     email_pattern,
-    orcid_pattern,
-    pubchem_property_from_cas,
-)
-from surf_utils.ord_mapping import (
     mapping_analyses_ord,
     mapping_atmo,
     mapping_role,
     mapping_stirring,
+    orcid_pattern,
 )
 
 logging.basicConfig(format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
@@ -41,6 +39,9 @@ def surf2ord(
     username: Annotated[str, typer.Option(help="Name of the person submitting the reaction")] = None,
     email: Annotated[str, typer.Option(help="E-mail of the person submitting the reaction")] = None,
     orcid: Annotated[str, typer.Option(help="ORCID of the person submitting the reaction")] = None,
+    overwrite_provenance: Annotated[
+        bool, typer.Option(help="Whether to overwrite existing provenance with provided info.")
+    ] = False,
     organization: Annotated[
         str, typer.Option(help="Organization the person submitting the reaction is associated with")
     ] = None,
@@ -55,6 +56,19 @@ def surf2ord(
     ] = True,
 ):
     """Translate reaction data from the tabular SURF format into the protocol buffer format which is used in the open reaction database."""
+
+    if not any([username, orcid, email]):
+        logger.warning(
+            "No username, orcid or email provided. If reactions don't contain according provenance, they will be rejected! Suggest to add provenance options."
+        )
+    elif any([username, orcid]) and not email:
+        raise ValueError("Both email and username / orcid are required if provenance is provided by user input!")
+
+    if overwrite_provenance:
+        if username and email:
+            logger.info("Overwriting existing provenance with provided user information")
+        else:
+            raise ValueError("To overwrite existing provenance, at least a username and email need to be provided!")
 
     if validate_cat_smls:  # create cache for catalyst lookup
         logger.info("Using validation")
@@ -137,14 +151,26 @@ def surf2ord(
                 cond_s.type = mapping_stirring[row["stirring_shaking"].upper()]
 
         # procedure text
-        if "procedure" in row and not row.procedure.isnull():
+        if "procedure" in row and len(row.procedure):
             reaction.notes.procedure_details = row["procedure"]
 
         # provenance either from SURF or overwritten from user input
         reaction.provenance.record_created.time.value = datetime.today().strftime("%Y-%m-%d")
         if "source_id" in row and re.match(doi_pattern, row.source_id):  # add DOI if present
             reaction.provenance.doi = re.findall(doi_pattern, row.source_id)[0]
-        if "provenance" in row:
+
+        # add provided provenance
+        if username:
+            reaction.provenance.record_created.person.username = username
+        if email:
+            reaction.provenance.record_created.person.email = email
+        if orcid and re.match(orcid_pattern, orcid):
+            reaction.provenance.record_created.person.orcid = orcid
+        if organization:
+            reaction.provenance.record_created.person.organization = organization
+
+        # if provenance is present, overwrite
+        if "provenance" in row and not overwrite_provenance:
             if re.findall(email_pattern, row.provenance):  # add Email if present
                 mail = re.findall(email_pattern, row.provenance)[0]
                 reaction.provenance.record_created.person.email = mail
@@ -159,14 +185,6 @@ def surf2ord(
                 row["provenance"] = row.provenance.replace(user, "").strip()
             if len(row.provenance) and mail and user:  # if still something left, add as organization
                 reaction.provenance.record_created.person.organization = row.provenance
-        if username:
-            reaction.provenance.record_created.person.username = username
-        if email:
-            reaction.provenance.record_created.person.email = email
-        if orcid and re.match(orcid_pattern, orcid):
-            reaction.provenance.record_created.person.orcid = orcid
-        if organization:
-            reaction.provenance.record_created.person.organization = organization
 
         # outcome template
         outcome = reaction.outcomes.add()
@@ -267,7 +285,7 @@ def surf2ord(
                         if row[f"{cpd}_yieldtype"].upper() in mapping_analyses_ord.keys():
                             yield_type = row[f"{cpd}_yieldtype"].upper()
                         elif "NMR" in row[f"{cpd}_yieldtype"].upper():
-                            yield_type = "NMR"
+                            yield_type = "NMR_1H"
                         elif "MS" in row[f"{cpd}_yieldtype"].upper():
                             yield_type = "MS"
                         elif "GC" in row[f"{cpd}_yieldtype"].upper():

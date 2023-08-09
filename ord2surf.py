@@ -13,8 +13,9 @@ from rdkit.Chem import Descriptors, MolFromSmiles
 from rich.progress import track
 from typing_extensions import Annotated
 
-from surf_utils.helpers import const_cols, last_cols
-from surf_utils.ord_mapping import (
+from surf_utils.mappings import (
+    const_cols,
+    last_cols,
     mapping_analyses_ord,
     mapping_role_ord,
     mapping_stirring_ord,

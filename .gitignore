@@ -1,15 +1,10 @@
 .vscode/
 
 *.pyc
-__pycache__
+__pycache__/
 
 *.pem
 .env
 
 *.error
-
-instantclient_21_1/
-
-data/*hte*
-data/*.xlsx
-
+*.log

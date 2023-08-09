@@ -1,0 +1,8 @@
+typer[all]
+ord-schema
+rdkit-pypi
+pandas
+beautifulsoup4
+lxml
+requests
+sqlalchemy
