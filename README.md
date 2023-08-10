@@ -12,12 +12,19 @@ Now you should be ready to go.
 ## SURF Structure
 SURF is a tabular file structure that is both human- and machine-readable. In a SURF spreadsheet, each row stores data of one reaction. The column headers structure the data and are split into constant (CC) and flexible (FC) categories. CCs never change and should be always present, independent of the number of reaction components. They capture the identifiers and provenance of the reaction as well as basic characteristics (reaction type, named reaction, reaction technology) and conditions (temperature, time, atmosphere, scale, concentration, stirring/shaking). Add-ons, such as the procedure or comments, belong to the CCs as well. The FCs describe the more variable part of a reaction, the different starting material(s), solvent(s), reagent(s) and product(s). Each reaction component is described by at an identifier such as the CAS number or molecule name, and a SMILES or InChI string storing the chemcial structure. While the SMILES/InChI string is available for every compound and can also serve as structural input for machine learning models, the CAS number, even though not always available, can be handy for chemists in the lab to order, itemize and find chemicals. For the starting material(s) and reagent(s), e.g. catalyst, ligand, additive, in addition to the two identifiers, a third column is added to cover the stochiometric amount (equivalents). For products, the respective yield and yield type is referenced. The flexibility of SURF allows capturing multiple starting materials and reagents, as these can be accommodated by adding three additional columns with (CAS, SMILES/InChI, and equivalents). If desired, further columns for additional identifiers like names or lot numbers can be added.
 
-The file `data/surf_template.tsv` provides an example of the SURF structure with five minisci-type reactions from literature.
+The file `data/surf_template.txt` provides an example of the SURF structure with five minisci-type reactions from literature.
 
 ## Combining Multiple SURF Files
 To concatenate multiple SURF files into one larger file, put all SURF files to be combined into one folder and run the following:
 ```bash
 python concat_surf.py <folder path> <output file>
+```
+
+#### Example:
+```bash
+ls data/hte-data
+    hte-1.txt hte-2.txt hte-3.txt hte-4.txt ...
+python concat_surf.py data/hte-data data/hte-data.txt
 ```
 
 ## Transformations for Interoperability
@@ -35,6 +42,11 @@ python surf2ord.py --help
 
 If the SURF file does not contain any or only partial provenance information, the user can provide personal information with the `--username`, `--email`, `--orcid` and `--organization` options.
 
+#### Example:
+```bash
+python surf2ord.py data/surf_template.txt data/surf_template.pbtxt --username "Alex Mueller" --email "alex.mueller@roche.com"
+```
+
 ### ORD to SURF
 To translate protocol buffers files used by the open reaction database back into the SURF format, run the following:
 ```bash
@@ -43,6 +55,11 @@ python ord2surf.py <input ORD file> <output SURF file>
 To get all the options of the script, run:
 ```bash
 python ord2surf.py --help
+```
+
+#### Example:
+```bash
+python ord2surf.py data/ord_search_result.pb data/ord_search_result.txt --validate
 ```
 
 ### SURF to Reaction SMILES
@@ -55,14 +72,25 @@ To get all the options of the script, run:
 python surf2rxnsmiles.py --help
 ```
 
+#### Example:
+```bash
+python surf2rxnsmiles.py data/surf_template.txt data/surf_template.rxnsmi
+```
+
 ### SURF to UDM
 The [Unified Data Model (UDM)](https://doi.org/10.1515/pac-2021-3013) is an open, extendable and freely available data format for the exchange of experimental information about compound synthesis and testing, developed by the [Pistoia Alliance](https://www.pistoiaalliance.org/projects/current-projects/unified-data-model/). To translate SURF files into UDM XML files, run the following: 
+
 ```bash
 python surf2udm.py <input SURF file> <output UDM file>
 ```
 To get all the options of the script, run:
 ```bash
 python surf2udm.py --help
+```
+
+#### Example:
+```bash
+python surf2udm.py data/surf_template.txt data/surf_template.xml
 ```
 
 ### UDM to SURF
@@ -73,6 +101,11 @@ python udm2surf.py <input UDM file> <output SURF file>
 To get all the options of the script, run:
 ```bash
 python udm2surf.py --help
+```
+
+#### Example:
+```bash
+python udm2surf.py data/udm_file.xml data/surf_file.txt
 ```
 
 ## Citation

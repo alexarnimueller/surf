@@ -10,7 +10,7 @@ import pandas as pd
 import typer
 from typing_extensions import Annotated
 
-from surf_utils.helpers import const_cols, last_cols, rxn_smiles_left, rxn_smiles_right
+from surf_utils.mappings import const_cols, last_cols, rxn_smiles_left, rxn_smiles_right
 
 app = typer.Typer()
 
