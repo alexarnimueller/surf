@@ -6,13 +6,13 @@
 import logging
 
 import pandas as pd
-import Typer
+import typer
 import xmltodict
 from bs4 import BeautifulSoup
 from lxml import etree
 from rdkit.Chem import MolFromMolBlock, MolToSmiles
 
-app = Typer.typer()
+app = typer.Typer()
 
 # TODO: get complete UDM example and finalize
 
@@ -136,5 +136,5 @@ def udm2smiles(input_file: str, output_file: str, delimiter: str = "\t", validat
 
 
 if __name__ == "__main__":
-    raise NotImplemented("Not yet implemented, coming soon!")
-    # app.run()
+    raise NotImplementedError("Not yet implemented, coming soon!")
+    # app()
