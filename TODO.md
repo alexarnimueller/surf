@@ -1,3 +1,3 @@
 # TODO
-- Finalize UDM scripts
+- Finalize UDM2SURF script
 - DateTime handling

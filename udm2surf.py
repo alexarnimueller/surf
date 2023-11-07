@@ -11,6 +11,7 @@ import xmltodict
 from bs4 import BeautifulSoup
 from lxml import etree
 from rdkit.Chem import MolFromMolBlock, MolToSmiles
+from typing_extensions import Annotated
 
 app = typer.Typer()
 
@@ -24,7 +25,7 @@ logger.setLevel(logging.INFO)
 def validate_udm_file(xml_file):
     """Function to validate an xml file (.xml) against the UDM schema (.xsd)"""
     errors = []
-    xmlschema = etree.XMLSchema(etree.parse("data/udm_schema/udm_6_0_0.xsd"))
+    xmlschema = etree.XMLSchema(etree.parse("udm_schema/udm_6_0_0.xsd"))
     validation_rslt = xmlschema.validate(etree.parse(xml_file))
     if not validation_rslt:
         errors = [(e.path, e.message) for e in xmlschema.error_log]
@@ -32,13 +33,14 @@ def validate_udm_file(xml_file):
 
 
 @app.command()
-def udm2smiles(input_file: str, output_file: str, delimiter: str = "\t", validate: bool = True):
-    # input_file = "data/spresi-10k.xml"
-    # input_file = "data/reaxys-reactions.xml"
-    # input_file = "data/UDM_example.xml"
-    # input_file = "data/minisci_lit.xml"
-    xsd_file = "udm_schema/udm_6_0_0.xsd"
-
+def udm2smiles(
+    input_file: Annotated[str, typer.Argument(help="name of the input file in UDM format")],
+    output_file: Annotated[str, typer.Argument(help="name of the output file in ORD format; suffixes: .pbtxt or .pb")],
+    delimiter: Annotated[str, typer.Argument(help="delimiter of the input file")] = "\t",
+    validate: Annotated[
+        bool, typer.Option(help="Whether to overwrite existing provenance with provided info.")
+    ] = True,
+):
     if validate:  # validate the XML file versus the UDM schema
         errors = validate_udm_file(input_file)
         if errors:
@@ -54,7 +56,7 @@ def udm2smiles(input_file: str, output_file: str, delimiter: str = "\t", validat
     xml = BeautifulSoup(raw, "xml")
 
     # read UDM schema
-    with open(xsd_file, "r") as f:
+    with open("udm_schema/udm_6_0_0.xsd", "r") as f:
         raw_xsd = f.read()
     xsd = BeautifulSoup(raw_xsd, "xml")
 
@@ -104,15 +106,15 @@ def udm2smiles(input_file: str, output_file: str, delimiter: str = "\t", validat
             continue
         # Variations
         for variation in reaction.find_all("VARIATION"):
-            yields = {
-                p.find("MOLECULE").attrs["MOL_ID"]: float(p.find("YIELD").find("exact").text)
-                for p in variation.find_all("PRODUCT")
-            }
+            yields = dict()
+            for p in variation.find_all("PRODUCT"):
+                yields[p.find("MOLECULE").attrs["MOL_ID"]] = float(p.find("YIELD").text)
             reagents = dict()
             for reagent in variation.find_all("REAGENT"):
                 reag_id = reagent.MOLECULE.attrs["MOL_ID"]
                 try:
                     reagents[reag_id] = mol_dict[reag_id]
+                    reagents[reag_id]["AMOUNT"] = reagent.find("AMOUNT").text
                 except KeyError:
                     logger.error(f"Reagent ID {reag_id} not found in molecules! Skipping this reagent in {rxn_id}")
             catalysts = dict()
@@ -120,21 +122,29 @@ def udm2smiles(input_file: str, output_file: str, delimiter: str = "\t", validat
                 cat_id = cat.MOLECULE.attrs["MOL_ID"]
                 try:
                     catalysts[cat_id] = mol_dict[cat_id]
+                    catalysts[cat_id]["AMOUNT"] = cat.find("AMOUNT").text
                 except KeyError:
                     logger.error(f"Catalyst ID {cat_id} not found in molecules! Skipping this catalyst in {rxn_id}")
-
+            reactants = dict()
+            for react in variation.find_all("REACTANT"):
+                react_id = react.MOLECULE.attrs["MOL_ID"]
+                try:
+                    reactants[react_id] = mol_dict[react_id]
+                    reactants[react_id]["AMOUNT"] = react.find("AMOUNT").text
+                except KeyError:
+                    logger.error(f"Reactant ID {react_id} not found in molecules! Skipping this reagent in {rxn_id}")
             conditions = variation.find("CONDITIONS")
-            if conditions and conditions.find("PREPARATION"):
-                row["procedure"] = conditions.find("PREPARATION").text
-            if conditions and conditions.find("CONDITION_GROUP"):
-                if conditions.find("CONDITION_GROUP").find("TEMPERATURE").find("exact"):
-                    row["temperature_deg_c"] = float(
-                        conditions.find("CONDITION_GROUP").find("TEMPERATURE").find("exact").text
-                    )
+            if conditions:
+                if conditions.find("PREPARATION"):
+                    row["procedure"] = conditions.find("PREPARATION").text
+                if conditions.find("TEMPERATURE"):
+                    row["temperature_deg_c"] = float(conditions.find("TEMPERATURE").text.strip())
+                if conditions.find("TIME"):
+                    row["time_h"] = float(conditions.find("TIME").text.strip())
 
     # list(xsd.find("xs:element", {"name": "VARIATION"}).find("xs:complexType").find("xs:sequence").children)
 
 
 if __name__ == "__main__":
-    raise NotImplementedError("Not yet implemented, coming soon!")
-    # app()
+    # raise NotImplementedError("Not yet implemented, coming soon!")
+    app()

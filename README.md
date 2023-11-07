@@ -1,3 +1,9 @@
+[![python](https://img.shields.io/badge/Python-3.9-3776AB.svg?style=flat&logo=python&logoColor=yellow)](https://www.python.org)
+[![RDKit badge](https://img.shields.io/badge/Powered%20by-RDKit-3838ff.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEXc3NwUFP8UPP9kZP+MjP+0tP////9ZXZotAAAAAXRSTlMAQObYZgAAAAFiS0dEBmFmuH0AAAAHdElNRQfmAwsPGi+MyC9RAAAAQElEQVQI12NgQABGQUEBMENISUkRLKBsbGwEEhIyBgJFsICLC0iIUdnExcUZwnANQWfApKCK4doRBsKtQFgKAQC5Ww1JEHSEkAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMi0wMy0xMVQxNToyNjo0NyswMDowMDzr2J4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjItMDMtMTFUMTU6MjY6NDcrMDA6MDBNtmAiAAAAAElFTkSuQmCC)](https://www.rdkit.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](https://lbesson.mit-license.org/)
+[![DOI](https://img.shields.io/badge/DOI-chemrxiv.org-red.svg)](https://chemrxiv.org)
+[![Citations](https://api.juleskreuer.eu/citation-badge.php?doi=10.1000/XXX-X-XX-XXX-X_X)](https://juleskreuer.eu/projekte/citation-badge/)
+
 # SURF: a simple user-friendly reaction format
 
 This repository containes example files and code to read, write and transform **SURF files** containing **chemical reaction data**.
@@ -111,12 +117,10 @@ python udm2surf.py data/udm_file.xml data/surf_file.txt
 ## Citation
 If you are using SURF in your project, please cite the following reference:
 ```
-@article{nippa_mueller2023surf,
-  title={SURF - a simple, user-friendly reaction format},
+@article{nippa_mueller_atz2023surf,
+  title={Simple User-Friendly Reaction Format},
   author={Nippa, David F. and M{\"u}ller, Alex T. and Atz, Kenneth and Konrad, David B. and Grether, Uwe and Martin, Rainer E. and Schneider, Gisbert},
-  journal={},
-  year={}
+  journal={ChemArxiv},
+  year={2023}
 }
-
-# ToDo: To be updated with DOI and journal.
 ```
