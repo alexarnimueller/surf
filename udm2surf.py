@@ -14,6 +14,8 @@ from rdkit.Chem import MolFromMolBlock, MolToSmiles
 from rich.progress import track
 from typing_extensions import Annotated
 
+from surf_utils.mappings import const_cols, last_cols
+
 app = typer.Typer()
 
 # TODO: get complete UDM example and finalize
@@ -263,6 +265,22 @@ def udm2smiles(
 
         # add reaction to SURF format
         surf = pd.concat((surf, pd.DataFrame(row).T))
+
+    # save to tabular SURF format
+    surf = surf[list(sorted(surf.columns.tolist()))]
+    surf = surf.reindex(
+        columns=[c for c in const_cols if c in surf.columns]
+        + [c for c in surf.columns if (c not in const_cols + last_cols and "product" not in c)]
+        + [c for c in surf.columns if "product" in c]
+        + [c for c in last_cols if c in surf.columns]
+    )
+    d_round = {'temperature_deg_c': 1, 'time_h': 0, 'concentration_mol_l': 6, 'scale_mol': 8}
+    d_round.update({k: 1 for k in surf.columns if "_yield" in k})
+    d_round.update({k: 3 for k in surf.columns if "_eq" in k})
+    surf = (
+        surf.dropna(how="all", axis=1).convert_dtypes().round(d_round)
+    )  # drop empty columns and round to max 8 decimal points
+    surf.to_csv(output_file, sep="\t", index=False)
 
 
 if __name__ == "__main__":
