@@ -120,7 +120,8 @@ If you are using SURF in your project, please cite the following reference:
 @article{nippa_mueller_atz2023surf,
   title={Simple User-Friendly Reaction Format},
   author={Nippa, David F. and M{\"u}ller, Alex T. and Atz, Kenneth and Konrad, David B. and Grether, Uwe and Martin, Rainer E. and Schneider, Gisbert},
-  journal={ChemArxiv},
-  year={2023}
+  journal={Chemrxiv-2023-nfq7h},
+  year={2023},
+  doi={10.26434/chemrxiv-2023-nfq7h}
 }
 ```
