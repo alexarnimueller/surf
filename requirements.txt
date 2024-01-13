@@ -1,8 +1,9 @@
 typer[all]
-ord-schema
+ord-schema==0.3.37
 rdkit-pypi
 pandas
 beautifulsoup4
 lxml
 requests
 sqlalchemy
+tqdm
