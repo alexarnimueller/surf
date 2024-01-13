@@ -68,16 +68,15 @@ def surf2ord(
 
         if len(reaction.reaction_id):
             row["rxn_id"] = reaction.reaction_id
-        else:
-            logger.warning(f"No reaction identifier present in reaction {i+1}! Adding number {i+1} as rxn_id.")
-            row["rxn_id"] = f"rxn_{i+1}"
-            
         if len(reaction.identifiers):
             for id in reaction.identifiers:
-                if id.type == 5:
-                    row["rxn_type"] = id.value
+                if id.type == 5 and not len(reaction.reaction_id):
+                    row["rxn_id"] = id.value
                 else:
-                    row["rxn_name"] = id.value
+                    row["rxn_type"] = id.value
+        else:
+            logger.warning(f"No reaction identifier present in reaction {i+1}! Not processing reaction.")
+            continue
 
         try:  # add origin (person) if present
             provenance = " ".join(
