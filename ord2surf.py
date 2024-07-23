@@ -11,6 +11,7 @@ import pandas as pd
 import typer
 from ord_schema import message_helpers, validations
 from ord_schema.proto import dataset_pb2
+from rdkit import RDLogger
 from rdkit.Chem import Descriptors, MolFromSmiles
 from rich.progress import track
 from typing_extensions import Annotated
@@ -27,29 +28,48 @@ from surf_utils.mappings import (
 
 logging.basicConfig(format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 app = typer.Typer()
 
 
 @app.command()
 def surf2ord(
-    input_file: Annotated[str, typer.Argument(help="name of the input file in ORD format; suffixes: .pbtxt or .pb")],
+    input_file: Annotated[
+        str, typer.Argument(help="name of the input file in ORD format; suffixes: .pbtxt, .pb or .pb.gz")
+    ],
     output_file: Annotated[str, typer.Argument(help="name of the output file in SURF format")],
     validate: Annotated[
         bool, typer.Option(help="whether the input ORD reactions should be validated for correctness first")
     ] = True,
+    verbose: Annotated[int, typer.Option(help="verbosity level, higher = more verbose")] = 1,
 ):
-    """Translate reaction data from the tabular SURF format into the protocol buffer format which is used in the open reaction database."""
+    """Translate reaction data from the tabular SURF format into the protocol buffer format
+    which is used in the open reaction database."""
+
     assert input_file.split(".")[-1] in [
         "pbtxt",
         "pb",
-    ], "Unknown file extension for input_file! (Known: .pbtxt or .pb)"
+        "gz",
+    ], "Unknown file extension for input_file! (Known: .pbtxt, .pb, .pb.gz)"
 
     assert output_file.split(".")[-1] in [
         "txt",
         "tsv",
     ], "Unknown file extension for output_file! (accepted: .txt or .tsv)"
+
+    # set verbosity level
+    loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
+    if int(verbose) == 0:
+        lvl = logging.ERROR
+        RDLogger.DisableLog("rdApp.*")
+    elif int(verbose) == 1:
+        lvl = logging.WARN
+    elif int(verbose) == 2:
+        lvl = logging.INFO
+    elif int(verbose) >= 3:
+        lvl = logging.DEBUG
+    for logger in loggers:
+        logger.setLevel(lvl)
 
     logger.info(f"Reading dataset from file {input_file} ...")
     dataset = message_helpers.load_message(input_file, dataset_pb2.Dataset)
