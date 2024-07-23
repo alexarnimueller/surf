@@ -110,7 +110,7 @@ def surf2ord(
             continue
         else:
             reaction.identifiers.add(type="NAME", value=row.rxn_id)
-
+        
         # add further identifiers
         rxn_name = [row[n] for n in row.keys() if n in ("rxn_name", "rxn_tech", "rxn_type")]
         if rxn_name:
