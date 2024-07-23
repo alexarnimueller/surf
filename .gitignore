@@ -1,5 +1,9 @@
 .vscode/
 
+sHPC/
+*.out
+*.err
+
 *.pyc
 __pycache__/
 
