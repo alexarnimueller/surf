@@ -81,6 +81,7 @@ mapping_role_ord = {
 }
 
 mapping_analyses_ord = {
+    0: "UNSPECIFIED",
     1: "UNKNOWN",
     2: "LC",
     3: "GC",

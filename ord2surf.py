@@ -59,7 +59,7 @@ def surf2ord(
         validations.validate_datasets({input_file: dataset})
 
     surf = pd.DataFrame()
-
+    logger.info(f"Processing {len(dataset.reactions)} reactions...")
     for i, reaction in track(
         enumerate(dataset.reactions), total=len(dataset.reactions), description="Transforming ORD to SURF..."
     ):
