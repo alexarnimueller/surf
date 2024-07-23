@@ -27,6 +27,7 @@ def whole_ord_to_surf(
         bool, typer.Option(help="whether the input ORD reactions should be validated for correctness first")
     ] = False,
     n_jobs: Annotated[int, typer.Option(help="number of parallel jobs to run")] = 4,
+    ignore_existing: Annotated[bool, typer.Option(help="ignore inputs with existing result files")] = True,
 ):
     """Transform all ORD data into SURF format.
     The output is saved in the same folders as the input pb.gz files as SURF .txt files
@@ -46,7 +47,15 @@ def whole_ord_to_surf(
             if file.endswith(".pb.gz"):
                 all_input_files.append(os.path.join(subdir, file))
     all_input_files = list(sorted(all_input_files))  # sorting alphabetically
-    print(f"Found {len(all_input_files)} ORD input files")
+
+    if ignore_existing:  # ignore input files with existing output files
+        print("Ignoring input files with existing output files")
+        all_input_files = [
+            f
+            for f in all_input_files
+            if not os.path.exists(os.path.join(output_path, os.path.basename(f.replace(".pb.gz", ".txt"))))
+        ]
+    print(f"Found {len(all_input_files)} ORD input files to process")
 
     # multithreading, process n_jobs files at a time
     fidx = 0
@@ -54,8 +63,7 @@ def whole_ord_to_surf(
     global Q
     Q = Queue(n_jobs)
     for i, input_file in enumerate(all_input_files):
-        out_file = os.path.basename(input_file.replace(".pb.gz", ".txt"))
-        out_file = os.path.join(output_path, out_file)
+        out_file = os.path.join(output_path, os.path.basename(input_file.replace(".pb.gz", ".txt")))
         t = threading.Thread(
             target=process_one_file,
             args=(input_file, out_file, validate),

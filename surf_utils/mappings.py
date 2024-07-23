@@ -131,4 +131,4 @@ mapping_stirring_ord = {
 
 mapping_time = {0: 1, 1: 1, 2: 0.016666, 3: 0.000277, 4: 24}
 
-mapping_vol_mol_mass = {1: 1000, 2: 1, 3: 0.001}
+mapping_vol_mol_mass = {1: 1000, 2: 1, 3: 0.001, 4: 0.000001}
