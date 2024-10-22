@@ -2,6 +2,7 @@
 [![RDKit badge](https://img.shields.io/badge/Powered%20by-RDKit-3838ff.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEXc3NwUFP8UPP9kZP+MjP+0tP////9ZXZotAAAAAXRSTlMAQObYZgAAAAFiS0dEBmFmuH0AAAAHdElNRQfmAwsPGi+MyC9RAAAAQElEQVQI12NgQABGQUEBMENISUkRLKBsbGwEEhIyBgJFsICLC0iIUdnExcUZwnANQWfApKCK4doRBsKtQFgKAQC5Ww1JEHSEkAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMi0wMy0xMVQxNToyNjo0NyswMDowMDzr2J4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjItMDMtMTFUMTU6MjY6NDcrMDA6MDBNtmAiAAAAAElFTkSuQmCC)](https://www.rdkit.org/)
 [![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/alexarnimueller/surf/blob/main/LICENSE)
 [![DOI](https://img.shields.io/badge/DOI-10.26434/chemrxiv--2023--nfq7h-red.svg)](https://doi.org/10.26434/chemrxiv-2023-nfq7h)
+[![DOI](https://img.shields.io/badge/10.5281/zenodo.13969986-blue.svg)](https://doi.org/10.5281/zenodo.13969986)
 ![Citations](https://api.juleskreuer.eu/citation-badge.php?doi=10.26434/chemrxiv-2023-nfq7h)
 
 # SURF: a simple user-friendly reaction format
@@ -125,3 +126,4 @@ If you are using SURF in your project, please cite the following reference:
   doi={10.26434/chemrxiv-2023-nfq7h}
 }
 ```
+The release used for publication is `v1.0.0`, archived under https://doi.org/10.5281/zenodo.13969986
