@@ -109,7 +109,7 @@ def surf2ord(
             logger.error(f"Reaction ID missing! Can't process reaction {idx}")
             continue
         else:
-            reaction.identifiers.add(type="NAME", value=row.rxn_id)
+            reaction.identifiers.add(type="CUSTOM", value=row.rxn_id)
         
         # add further identifiers
         rxn_name = [row[n] for n in row.keys() if n in ("rxn_name", "rxn_tech", "rxn_type")]
